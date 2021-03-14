@@ -23,6 +23,17 @@ namespace product.Controllers {
             _logger.LogInformation("getting the products");
             return _itemRepository.GetAll();    
         }
+        [HttpGet("{productId}")]
+        public IActionResult GetById([FromRoute] long productId)
+        {
+            _logger.LogInformation("getting the products");
+            var result = _itemRepository.GetItem(productId);
+            if(result != null)
+            {
+                return Ok(result);
+            }
+            return NoContent();
+        }
 
         [HttpPost]
         public void Post([FromBody]Item item){
