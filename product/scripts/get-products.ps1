@@ -1,0 +1,1 @@
+Invoke-RestMethod -Uri 'http://localhost:3500/v1.0/invoke/product/method/products'

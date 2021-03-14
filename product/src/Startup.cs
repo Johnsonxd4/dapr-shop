@@ -27,6 +27,7 @@ namespace product
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<IItemRepository, ItemRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -44,7 +45,6 @@ namespace product
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "product v1"));
             }
 
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 
