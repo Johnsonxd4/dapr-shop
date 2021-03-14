@@ -1,6 +1,6 @@
 # Initialize dapr locally
 
-you gonna need docker running:
+you gonna need docker daemon running:
 ```
 dapr init
 ```
