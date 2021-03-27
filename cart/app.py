@@ -1,8 +1,10 @@
 from flask import Flask,request,jsonify
+from flask_cors import CORS
 import requests
 import os
 import json
 app = Flask(__name__)
+CORS(app)
 dapr_port = os.getenv('DAPR_HTTP_PORT',3501)
 cart_store = 'cartstore'
 
