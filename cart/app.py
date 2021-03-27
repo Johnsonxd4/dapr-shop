@@ -48,9 +48,23 @@ def add_to_cart_store(productId, userName):
     data=body)
     response.raise_for_status()
 
+def remove_from_cart_store(productId, userName):
+    """
+    remove a product in the cart
+    """
+    currentCart = get_from_cart_store(userName)
+    currentCart.remove(productId)
+    body = json.dumps([{
+            'key': userName,
+            'value':  currentCart
+        }])
+    response = requests.post(f'http://localhost:{dapr_port}/v1.0/state/{cart_store}',
+    data=body)
+    response.raise_for_status()
 
 
-@app.route('/add',methods=['POST'])
+
+@app.route('/cart',methods=['PUT'])
 def add():
     productId = request.args.get("productId")
     userName = request.args.get("user")
@@ -58,6 +72,14 @@ def add():
         add_to_cart_store(productId, userName)
         return "The item was added"
     return "the item do not exits"
+
+@app.route('/cart',methods=['DELETE'])
+def deleteFromCart():
+    productId = request.args.get("productId")
+    userName = request.args.get("user")
+    remove_from_cart_store(productId, userName)
+    return "The item was removed"
+
 
 @app.route('/cart',methods=['GET'])
 def get_cart():
